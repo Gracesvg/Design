@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,12 +28,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -60,22 +64,22 @@ fun SignupScreen(navController: NavHostController){
     val context = LocalContext.current
 
 
-    Column (
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(top = 20.dp)
+    Column (modifier = Modifier
+        .padding(top = 10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+
     )
     {
-
-        Spacer(modifier = Modifier.height(50.dp))
 
         val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.animation))
         val progress by animateLottieCompositionAsState(composition )
 
         LottieAnimation(composition, progress,
-            modifier = Modifier.size(400.dp))
+            modifier = Modifier.size(380.dp))
 
         TextField(value = FirstName,
             onValueChange = { FirstName = it },
+            shape = CutCornerShape(5.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
@@ -86,7 +90,6 @@ fun SignupScreen(navController: NavHostController){
                         focusedIndicatorColor=Color.Transparent,
                         unfocusedIndicatorColor= Color.Transparent)
             },
-
             singleLine = true,
             leadingIcon = {
                 Row (
@@ -105,20 +108,25 @@ fun SignupScreen(navController: NavHostController){
                         .background(Color.White)
                     )
                 }
+
             },
-            placeholder = {
-                Text(text = "FirstName")
-            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+
+            label = { Text(text = "Firstname")},
+            placeholder = { Text(text = "")},
             textStyle = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontFamily = FontFamily.Monospace
             )
+
         )
 
 
         TextField(value = LastName,
             onValueChange = { LastName = it },
+            shape = CutCornerShape(5.dp),
+
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
@@ -149,8 +157,13 @@ fun SignupScreen(navController: NavHostController){
                     )
                 }
             },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+
+            label = { Text(text = "LastName")},
+
+
             placeholder = {
-                Text(text = "LastName")
+                Text(text = "")
             },
             textStyle = TextStyle(
                 fontSize = 14.sp,
@@ -163,6 +176,8 @@ fun SignupScreen(navController: NavHostController){
 
         TextField(value = Email,
             onValueChange = { Email = it },
+            shape = CutCornerShape(5.dp),
+
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
@@ -193,8 +208,12 @@ fun SignupScreen(navController: NavHostController){
                     )
                 }
             },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+
+            label = { Text(text = "Email")},
+
             placeholder = {
-                Text(text = "Email")
+                Text(text = "")
             },
             textStyle = TextStyle(
                 fontSize = 14.sp,
@@ -205,6 +224,8 @@ fun SignupScreen(navController: NavHostController){
 
         TextField(value = Password,
             onValueChange = { Password = it },
+            shape = CutCornerShape(5.dp),
+
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
@@ -235,8 +256,12 @@ fun SignupScreen(navController: NavHostController){
                     )
                 }
             },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+
+            label = { Text(text = "Password")},
+
             placeholder = {
-                Text(text = "Password")
+                Text(text = "")
             },
             textStyle = TextStyle(
                 fontSize = 14.sp,
@@ -247,6 +272,8 @@ fun SignupScreen(navController: NavHostController){
 
         TextField(value = ConfirmPassword,
             onValueChange = { ConfirmPassword = it },
+            shape = CutCornerShape(5.dp),
+
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
@@ -277,8 +304,10 @@ fun SignupScreen(navController: NavHostController){
                     )
                 }
             },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            label = { Text(text = "ConfirmPassword")},
             placeholder = {
-                Text(text = "ConfirmPassword")
+                Text(text = "")
             },
             textStyle = TextStyle(
                 fontSize = 14.sp,
@@ -286,7 +315,7 @@ fun SignupScreen(navController: NavHostController){
                 fontFamily = FontFamily.Monospace
             )
         )
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         
         Button(onClick = {
             val xyz = AuthViewModel(navController, context )
@@ -294,7 +323,6 @@ fun SignupScreen(navController: NavHostController){
         },
             colors = buttonColors(Color.Black),
             modifier = Modifier.width(300.dp),
-            shape = AbsoluteCutCornerShape(10.dp)
         ) {
             Text(text = "Register",
                 fontFamily = FontFamily.Monospace,
@@ -302,11 +330,15 @@ fun SignupScreen(navController: NavHostController){
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold)
         }
-        Text(text = "Already Have an Account? SIGN IN",
-            modifier = Modifier.clickable {
-                navController.navigate(ROUTE_LOGIN)
-            },
-            fontSize = 15.sp)
+        Row {
+            Text(text = "Already Have an Account? ", 
+                fontSize = 15.sp)
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(text = "SIGN IN",
+                modifier = Modifier.clickable {
+                    navController.navigate(ROUTE_LOGIN)
+                })
+        }
 
 
 

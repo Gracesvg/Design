@@ -30,13 +30,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -65,8 +68,12 @@ fun LoginScreen(navController: NavHostController) {
 
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(top = 20.dp)
-    )
+
+        modifier = Modifier.
+        padding(top = 20.dp)
+
+
+        )
     {
 
         Spacer(modifier = Modifier.height(50.dp))
@@ -75,7 +82,7 @@ fun LoginScreen(navController: NavHostController) {
         val progress by animateLottieCompositionAsState(composition )
 
         LottieAnimation(composition, progress,
-            modifier = Modifier.size(400.dp))
+            modifier = Modifier.size(380.dp))
 
         TextField(value = Email,
             onValueChange = { Email = it },
@@ -109,8 +116,10 @@ fun LoginScreen(navController: NavHostController) {
                     )
                 }
             },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            label = { Text(text = "Email")},
             placeholder = {
-                Text(text = "Email")
+                Text(text = "")
             },
             textStyle = TextStyle(
                 fontSize = 14.sp,
@@ -150,8 +159,10 @@ fun LoginScreen(navController: NavHostController) {
                     )
                 }
             },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            label = { Text(text = "Password")},
             placeholder = {
-                Text(text = "Password")
+                Text(text = "")
             },
             textStyle = TextStyle(
                 fontSize = 14.sp,
@@ -167,23 +178,22 @@ fun LoginScreen(navController: NavHostController) {
         },
             colors = ButtonDefaults.buttonColors(Color.Black),
             modifier = Modifier.width(300.dp),
-            shape = AbsoluteCutCornerShape(10.dp)
         ) {
-            Text(text = "Register",
+            Text(text = "Login",
                 fontFamily = FontFamily.Monospace,
                 color = Color.White,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold)
         }
-        Text(text = "Need an Account? SIGN UP",
-            modifier = Modifier.clickable {
-                navController.navigate(ROUTE_SIGNUP)
-            },
-            fontSize = 15.sp)
-
-
-
-
+        Row {
+            Text(text = "Need an Account? ",
+                fontSize = 15.sp)
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(text = "SIGN UP",
+                modifier = Modifier.clickable {
+                    navController.navigate(ROUTE_SIGNUP)
+                })
+        }
     }
 }
 @Preview
