@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -53,7 +55,7 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.grace.designsynergy.R
 import com.grace.designsynergy.data.AuthViewModel
-import com.grace.designsynergy.navigation.ROUTE_BOOKMARK
+import com.grace.designsynergy.navigation.ROUTE_HOME
 import com.grace.designsynergy.navigation.ROUTE_LOGIN
 import com.grace.designsynergy.navigation.ROUTE_SIGNUP
 
@@ -69,8 +71,10 @@ fun LoginScreen(navController: NavHostController) {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
 
-        modifier = Modifier.
-        padding(top = 20.dp)
+        modifier = Modifier
+            .padding(top = 20.dp)
+            .verticalScroll(rememberScrollState())
+
 
 
         )
@@ -173,8 +177,10 @@ fun LoginScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(30.dp))
 
         Button(onClick = {
-            val xyz = AuthViewModel(navController, context )
-            xyz.login(Email.text.trim(),Password.text.trim())
+            val mylogin = AuthViewModel(navController, context )
+            mylogin.login(Email.text.trim(),Password.text.trim())
+            navController.navigate(ROUTE_HOME)
+
         },
             colors = ButtonDefaults.buttonColors(Color.Black),
             modifier = Modifier.width(300.dp),

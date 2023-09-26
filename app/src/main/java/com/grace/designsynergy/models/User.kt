@@ -1,15 +1,13 @@
 package com.grace.designsynergy.models
 
 class User {
-    var email: String = ""
-    var pass: String = ""
-    var userid: String = ""
+    var Email: String = ""
+    var Password: String = ""
 
 
-    constructor(email: String, pass: String,userid: String) {
-        this.email = email
-        this.pass = pass
-        this.userid = userid
+    constructor(Email: String, Password: String) {
+        this.Email = Email
+        this.Password = Password
 
     }
     constructor()

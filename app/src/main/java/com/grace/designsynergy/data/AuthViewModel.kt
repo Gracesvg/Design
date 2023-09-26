@@ -21,13 +21,13 @@ class AuthViewModel (var navController:NavHostController,var context:Context) {
         mAuth = FirebaseAuth.getInstance()
     }
 
-    fun signup(email: String, pass: String, confpass: String) {
+    fun signup(Email: String, Password: String, ConfirmPassword: String) {
 
-        if (email.isBlank() || pass.isBlank() || confpass.isBlank()) {
+        if (Email.isBlank() || Password.isBlank() || ConfirmPassword.isBlank()) {
             Toast.makeText(context, "Please email and password cannot be blank", Toast.LENGTH_LONG)
                 .show()
         } else {
-            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
+            mAuth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(context, "Registered Successfully", Toast.LENGTH_SHORT).show()
                     navController.navigate(ROUTE_LOGIN)
@@ -41,18 +41,20 @@ class AuthViewModel (var navController:NavHostController,var context:Context) {
         }
     }
 
-    fun login(email: String, Password: String) {
-        mAuth.signInWithEmailAndPassword(email, Password).addOnCompleteListener {
-            if (email.isBlank() || Password.isBlank()) {
+    fun login(Email: String, Password: String) {
+        mAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener {
+            if (Email.isBlank() || Password.isBlank()) {
                 Toast.makeText(context, "Please Email and password cannot be blank", Toast.LENGTH_LONG)
                     .show()
-                mAuth.signInWithEmailAndPassword(email,Password).addOnCompleteListener {
+                mAuth.signInWithEmailAndPassword(Email,Password).addOnCompleteListener {
                     if (it.isSuccessful){
                         Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
                         navController.navigate(ROUTE_HOME)
                     }
                     else{
                         Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show()
+                        navController.navigate(ROUTE_LOGIN)
+
 
                     }
 
@@ -66,12 +68,17 @@ class AuthViewModel (var navController:NavHostController,var context:Context) {
         navController.navigate(ROUTE_LOGIN)
     }
 
-    fun isloggedin(): Boolean {
-        return mAuth.currentUser != null
-    }
+//    fun isloggedin(): Boolean {
+//        return mAuth.currentUser != null
+//    }
 
 
 }
+
+    fun isloggedin():Boolean {
+        return mAuth.currentUser != null
+
+    }
 }
 
 

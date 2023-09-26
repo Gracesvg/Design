@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -64,8 +66,11 @@ fun SignupScreen(navController: NavHostController){
     val context = LocalContext.current
 
 
+
+
     Column (modifier = Modifier
-        .padding(top = 10.dp),
+        .padding(top = 10.dp)
+        .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
 
     )
@@ -318,8 +323,8 @@ fun SignupScreen(navController: NavHostController){
         Spacer(modifier = Modifier.height(20.dp))
         
         Button(onClick = {
-            val xyz = AuthViewModel(navController, context )
-            xyz.signup(Email.text,Password.text,Password.text)
+            val mysignup = AuthViewModel(navController, context )
+            mysignup.signup(Email.text.trim(),Password.text,Password.text)
         },
             colors = buttonColors(Color.Black),
             modifier = Modifier.width(300.dp),
@@ -330,6 +335,7 @@ fun SignupScreen(navController: NavHostController){
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold)
         }
+
         Row {
             Text(text = "Already Have an Account? ", 
                 fontSize = 15.sp)

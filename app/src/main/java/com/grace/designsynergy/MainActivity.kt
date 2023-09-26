@@ -7,18 +7,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.grace.designsynergy.navigation.AppNavHost
-import com.grace.designsynergy.screens.home.CustomAppBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppNavHost()
+            MainScreen()
         }
     }
-}
-
-@Composable
-fun Greeting(name: String){
 }
 

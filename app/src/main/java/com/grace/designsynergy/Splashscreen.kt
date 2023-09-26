@@ -1,8 +1,6 @@
 package com.grace.designsynergy
 
-//package com.example.jetpackcomposecourseoutline
-
-    import android.annotation.SuppressLint
+import android.annotation.SuppressLint
     import android.content.Intent
     import android.os.Bundle
     import androidx.activity.ComponentActivity
@@ -12,7 +10,8 @@ package com.grace.designsynergy
     import androidx.compose.foundation.layout.Column
     import androidx.compose.foundation.layout.Spacer
     import androidx.compose.foundation.layout.fillMaxSize
-    import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
     import androidx.compose.foundation.layout.padding
     import androidx.compose.foundation.layout.size
     import androidx.compose.material3.CircularProgressIndicator
@@ -78,16 +77,17 @@ class Splashscreen: ComponentActivity() {
             Spacer(modifier = Modifier.height(10.dp))
 
             //Lottie Animation
-            val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.intro))
+            val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.f))
             val progress by animateLottieCompositionAsState(composition)
             LottieAnimation(composition, progress,
-                modifier = Modifier.size(600.dp)
+                modifier = Modifier.size(15000.dp)
+                    .fillMaxWidth()
             )
 
             Text(
-                text = "Welcome",
+                text = "Design for you",
                 textAlign = TextAlign.Center,
-                fontSize = 50.sp,
+                fontSize = 30.sp,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
